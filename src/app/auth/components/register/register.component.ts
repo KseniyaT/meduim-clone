@@ -18,12 +18,12 @@ import { BackendErrorsInterface } from 'src/app/shared/types/backendErrors.inter
 
 export class RegisterComponent implements OnInit {
   form: FormGroup;
-  isSubmitting$: Observable<boolean>
-  backendErrors$: Observable<BackendErrorsInterface | null>
+  isSubmitting$: Observable<boolean>;
+  backendErrors$: Observable<BackendErrorsInterface | null>;
 
   constructor(
-    private fb:FormBuilder, 
-    private store:Store, 
+    private fb: FormBuilder, 
+    private store: Store, 
     private authServise: AuthService,
   ) {}
 
@@ -32,17 +32,17 @@ export class RegisterComponent implements OnInit {
     this.initializeValues();
   }
 
-  initializeValues(): void {
-    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
-    this.backendErrors$ = this.store.pipe(select(validationErrorsSelector));
-  }
-
   initiolazeForm(): void {
     this.form = this.fb.group({
       username: ['', Validators.required],
       email: '',
       password: ''
     });
+  }  
+
+  initializeValues(): void {
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
+    this.backendErrors$ = this.store.pipe(select(validationErrorsSelector));
   }
 
   onSubmit(): void {
